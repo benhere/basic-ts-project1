@@ -1,0 +1,16 @@
+{
+  "name": "ts-project1",
+  "version": "1.0.0",
+  "description": "basic typescript project",
+  "main": "app.js",
+  "scripts": {
+    "start": "lite-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "naru",
+  "license": "ISC",
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  }
+}
