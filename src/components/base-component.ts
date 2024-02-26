@@ -1,47 +1,43 @@
 
-namespace AppSpace {
-  // Generic Component Base class
-  export abstract class Component<
-    T extends HTMLElement,
-    U extends HTMLElement
-  > {
-    templateElement: HTMLTemplateElement;
-    hostElement: T;
-    element: U;
 
-    constructor(
-      templateId: string,
-      hostElementId: string,
-      insertAtStart: boolean,
-      newElementId?: string
-    ) {
-      this.templateElement = document.getElementById(
-        templateId
-      )! as HTMLTemplateElement;
-      this.hostElement = document.getElementById(hostElementId)! as T;
+// Generic Component Base class
+export abstract class Component<T extends HTMLElement, U extends HTMLElement> {
+  templateElement: HTMLTemplateElement;
+  hostElement: T;
+  element: U;
 
-      const importedNode = document.importNode(
-        this.templateElement.content,
-        true
-      );
-      this.element = importedNode.firstElementChild as U;
-      if (newElementId) {
-        this.element.id = newElementId;
-      }
+  constructor(
+    templateId: string,
+    hostElementId: string,
+    insertAtStart: boolean,
+    newElementId?: string
+  ) {
+    this.templateElement = document.getElementById(
+      templateId
+    )! as HTMLTemplateElement;
+    this.hostElement = document.getElementById(hostElementId)! as T;
 
-      this.attach(insertAtStart);
-      // this.renderContent();
-      // this.configure();
+    const importedNode = document.importNode(
+      this.templateElement.content,
+      true
+    );
+    this.element = importedNode.firstElementChild as U;
+    if (newElementId) {
+      this.element.id = newElementId;
     }
 
-    private attach(insertAtBeg: boolean) {
-      this.hostElement.insertAdjacentElement(
-        insertAtBeg ? "afterbegin" : "beforeend",
-        this.element
-      );
-    }
-
-    abstract configure(): void;
-    abstract renderContent(): void;
+    this.attach(insertAtStart);
+    // this.renderContent();
+    // this.configure();
   }
+
+  private attach(insertAtBeg: boolean) {
+    this.hostElement.insertAdjacentElement(
+      insertAtBeg ? "afterbegin" : "beforeend",
+      this.element
+    );
+  }
+
+  abstract configure(): void;
+  abstract renderContent(): void;
 }

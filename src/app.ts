@@ -1,13 +1,9 @@
+
 // basic TS project
 
-/// <reference path="components/project-input.ts" />
-/// <reference path="components/project-list.ts" />
-/// <reference path="components/project-item.ts" />
-/// <reference path="components/base-component.ts" />
+import { ProjectInput } from "./components/project-input.js";
+import { ProjectList } from "./components/project-list.js";
 
-namespace AppSpace {
-
-  new ProjectInput();
-  new ProjectList("active");
-  new ProjectList("finished");
-}
+new ProjectInput();
+new ProjectList("active");
+new ProjectList("finished");
