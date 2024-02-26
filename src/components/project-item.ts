@@ -1,5 +1,8 @@
 
 /// <reference path="base-component.ts" />
+/// <reference path="../decorators/autobind.ts" />
+/// <reference path="../models/project.ts" />
+/// <reference path="../models/drag-drop.ts" />
 
 namespace AppSpace {
   // ProjectItem class - it will render single project item
