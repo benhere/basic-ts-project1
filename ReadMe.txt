@@ -40,3 +40,95 @@ Attached you find all the code snapshots for this module - you also find them at
 # JavaScript Modules (Overview): https://medium.com/computed-comparisons/commonjs-vs-amd-vs-requirejs-vs-es6-modules-2e814b114a0b
 
 # More on ES Modules: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules
+
+# Section 11: Using Webpack with TypeScript
+
+# Due to multiple imports in the current project we can see a bunch of HTTP requests. Every HTTP request that needs to be made of course takes a little time, it takes time to download the files and every HTTP request has like a base overhead, a base duration it always takes. This can really introduce a lot of latency and can slow down our project because of sheer amount of HTTP requests made.
+
+# To solve above issue we can use 'Webpack'. 
+
+# Webpack is a tool that help us bundle the files together.
+
+# Webpack is a bundling & "Build Orchestration" tool which helps us reduce the amount of HTTP requests by bundling code together so that we can write code and split up across multiple files. Further, it will also optimize the code and allow us to add more build steps, more build tools.
+
+# webpack-cli is used to run webpack related commands.
+
+# webpack-dev-server used to watch files for change during development processand automatically triggers webpack to recompile when something changes and which auto serves our page.
+
+# ts-loader package works along with webpack and it tells webpack how to convert TS code to JS code so that webpack is able to do both, compile our code and bundle emitted jS files into one bundled js file.
+
+# As we use Webpack, we don't need rootDir configuration in `tsconfig.json` file and webpack will determine where your root files are.
+
+# To use Webpack, we need to add 'build' script in package.json file as below 
+
+# "build": "webpack"
+
+# webpack-dev-server - a tool we use for spinning up a local development server that serves our website.
+
+`
+# Adjust Webpack Config
+# In the next lecture, we'll add webpack-dev-server - a tool we use for spinning up a local development server that serves our website.
+
+# When using the latest Webpack version, you must edit the webpack.config.js file slightly.
+
+1) Add a devServer option
+
+devServer: {
+  static: [
+    {
+      directory: path.join(__dirname),
+    },
+  ],
+},
+2) Set output.publicPath to '/dist/'
+
+output: {
+  filename: 'bundle.js',
+  path: path.resolve(__dirname, 'dist'),
+  publicPath: '/dist/'
+},
+(we add publicPath in the next lecture - make sure you set it to '/dist/', NOT to just 'dist'!)
+
+After the next lecture, the finished, updated webpack.config.js file should look like this:
+
+const path = require('path');
+ 
+module.exports = {
+  mode: 'development',
+  entry: './src/app.ts',
+  devServer: {
+    static: [
+      {
+        directory: path.join(__dirname),
+      },
+    ],
+  },
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/dist/',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['.ts', '.js'],
+  },
+};
+
+`
+
+# clean-webpack-plugin  - this is used to clean files from 'dist' folder.
+
+# Useful Resources & Links
+# Attached you find all the code snapshots for this module - you also find them attached to individual lectures throughout this module.
+
+# These links might also be interesting:
+
+# Official Webpack Docs: https://webpack.js.org/
